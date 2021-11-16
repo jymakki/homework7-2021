@@ -5,13 +5,13 @@ window.addEventListener("load", function() {
 
 });
 
-// Play
+// Play Video
 document.querySelector("#play").addEventListener("click", function() {
 	console.log("Play Video");
 	video.play();
 });
 
-// Pause 
+// Pause Video
 
 document.querySelector("#pause").addEventListener("click", function() {
 	console.log("Pause Video");
@@ -20,9 +20,9 @@ document.querySelector("#pause").addEventListener("click", function() {
 
 // Slower 
 
-document.querySelector("#slower").addEventListener("click", function() {
+document.querySelector("#slower").addEventListener("click", function(){
 	console.log("Old video speed is " + video.playbackRate);
-	video.playbackRate *=.95;
+	video.playbackRate *=.95
 	console.log("New video speed is " + video.playbackRate);
 });
 
@@ -31,7 +31,7 @@ document.querySelector("#slower").addEventListener("click", function() {
 
 document.querySelector("#faster").addEventListener("click", function() {
 	console.log("Speed Up");
-	video.playbackRate/=0.95;
+	video.playbackRate /= 0.95;
 	console.log("New video speed is " + video.playbackRate);
 });
 
@@ -39,49 +39,56 @@ document.querySelector("#faster").addEventListener("click", function() {
 
 document.querySelector("#skip").addEventListener("click", function() {
 	console.log("Current location is " + video.currentTime);
-	if (video.currentTime < video.duration - 15){
-		video.currentTime += 15
+	if (video.currentTime + 15 > video.duration){
+		video.currentTime = 0;
+		console.log("Loop to beginning");
+		console.log("Updated location: ", video.currentTime);
+		video.play();}
+	else{
+		video.currentTime +=15
+		console.log("Updated location: ", video.currentTime);
+		video.play();
 	}
+
 });
 
 
-// Mute
+// Mute Video
 
 document.querySelector("#mute").addEventListener("click", function() {
 	console.log("Mute Video" + video.muted);
 	if (video.muted === false) {
+		console.log("Mute Video");
 		video.muted = true;
-	}
+		document.querySelector("#mute").innerHTML = "Unmute";}
 	else {
+		console.log("Unmute Video");
 		video.muted = false;
-	}
-	});
+		document.querySelector("#mute").innerHTML = "Mute";}
+});
 
 // Volume Slider 
 
-document.querySelector("#slider").addEventListener("mousemove", function(){
-	console.log("Before:" + player.volume);
-	play.volume = val / 100;
-	console.log("After:" + player.volume);
+
+var slider = document.querySelector("#slider")
+
+slider.addEventListener("click", function(){
+	console.log("Before:" + video.volume);
+	video.volume = slider.value/100;
+	document.querySelector("#volume").innerHTML = video.volume * 100 + "%"
+	console.log("After:" + video.volume);
+
 });
 
-// var slider = document.getElementById("myRange");
-// var output = document.getElementById("demo");
-// output.innerHTML = slider.value; // Display the default slider value
 
-// // Update the current slider value (each time you drag the slider handle)
-// slider.oninput = function() {
-//   output.innerHTML = this.value;
-// }
-
-// old school
+// Styled - old school
 document.querySelector("#vintage").addEventListener("click", function() {
-	console.log("Change to the old version");
+	console.log("Change to old school version");
 	video.classList.add("oldSchool");
 });
 
-// original
+// Original
 document.querySelector("#orig").addEventListener("click", function() {
-	console.log("Change to the original version");
+	console.log("Change to original version");
 	video.classList.remove("oldSchool");
 });
