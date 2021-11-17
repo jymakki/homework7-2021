@@ -9,6 +9,8 @@ window.addEventListener("load", function() {
 document.querySelector("#play").addEventListener("click", function() {
 	console.log("Play Video");
 	video.play();
+	console.log(video.currentTime);
+	document.querySelector("#volume").innerHTML=video.volume * 100 + "%"
 });
 
 // Pause Video
@@ -71,13 +73,11 @@ document.querySelector("#mute").addEventListener("click", function() {
 
 
 var slider = document.querySelector("#slider")
-
 slider.addEventListener("click", function(){
 	console.log("Before:" + video.volume);
 	video.volume = slider.value/100;
 	document.querySelector("#volume").innerHTML = slider.value + "%"
 	console.log("After:" + video.volume);
-
 });
 
 
